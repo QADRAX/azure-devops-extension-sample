@@ -6,7 +6,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const entries = {};
 
 // Loop through subfolders in the "Samples" folder and add an entry for each one
-const samplesDir = path.join(__dirname, "src/Samples");
+const samplesDir = path.join(__dirname, "src/Contributions");
 fs.readdirSync(samplesDir).filter(dir => {
     if (fs.statSync(path.join(samplesDir, dir)).isDirectory()) {
         entries[dir] = "./" + path.relative(process.cwd(), path.join(samplesDir, dir, dir));
@@ -17,6 +17,13 @@ module.exports = {
     entry: entries,
     output: {
         filename: "[name]/[name].js"
+    },
+    devtool: 'inline-source-map',
+    devServer: {
+        publicPath: '/dist/',
+        contentBase: __dirname,
+        hot: true,
+        port: 44300,
     },
     resolve: {
         extensions: [".ts", ".tsx", ".js"],
@@ -54,6 +61,11 @@ module.exports = {
         ]
     },
     plugins: [
-        new CopyWebpackPlugin([ { from: "**/*.html", context: "src/Samples" }])
+        new CopyWebpackPlugin({
+            patterns: [
+                { from: "**/*.html", context: "src/Contributions" },
+                { from: "node_modules/vss-web-extension-sdk/lib/VSS.SDK.min.js", to: './MyWidget' }
+            ]
+        })
     ]
 };

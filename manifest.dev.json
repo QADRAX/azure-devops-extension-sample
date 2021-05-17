@@ -1,0 +1,35 @@
+{
+    "manifestVersion": 1,
+    "id": "QadraDemoExtensionsDev",
+    "publisher": "CarlosCuadra",
+    "version": "1.0.3",
+    "name": "Qadra Devops Extensions",
+    "baseUri": "https://localhost:44300",
+    "description": "just a test",
+    "categories": [
+        "Azure Pipelines"
+    ],
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],
+    "icons": {
+        "default": "logo.png"
+    },
+    "content": {
+        "details": {
+            "path": "overview.md"
+        }
+    },
+    "files": [
+        {
+            "path": "static",
+            "addressable": true
+        },
+        {
+            "path": "dist",
+            "addressable": true
+        }
+    ]
+}
